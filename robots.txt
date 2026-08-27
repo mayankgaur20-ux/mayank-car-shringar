@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mayankgaur20-ux.github.io/mayank-car-shringar/sitemap.xml
