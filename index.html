@@ -147,6 +147,31 @@
   }
   .catnav a:hover{background:var(--gainda); color:var(--raat); border-color:var(--gainda);}
 
+  .search-bar{
+    display:flex; align-items:center; gap:8px;
+    background:rgba(251,241,222,0.08);
+    border:1px solid rgba(251,241,222,0.18);
+    border-radius:12px;
+    padding:9px 14px;
+    margin-bottom:14px;
+  }
+  .search-bar svg{ width:17px; height:17px; color:var(--malai-2); flex-shrink:0; }
+  .search-bar input{
+    all:unset; flex:1; color:var(--malai); font-size:14px; font-family:'Mukta';
+  }
+  .search-bar input::placeholder{ color:rgba(251,241,222,0.45); }
+  .search-clear{
+    all:unset; cursor:pointer; color:var(--malai-2); font-size:20px; line-height:1;
+    padding:0 4px;
+  }
+  .search-clear:hover{ color:var(--sindoor); }
+  .no-results{
+    display:none;
+    text-align:center; padding:50px 20px;
+    color:var(--ink-soft); font-size:15px;
+  }
+  .no-results a{ color:var(--sindoor); font-weight:600; }
+
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
@@ -205,6 +230,12 @@
     border:1px solid rgba(251,241,222,0.12);
   }
   .hero-visual img{width:100%; height:100%; object-fit:cover;}
+  .hero-slide{
+    position:absolute; top:0; left:0;
+    opacity:0; transition:opacity .6s ease;
+    pointer-events:none;
+  }
+  .hero-slide.active{ opacity:1; pointer-events:auto; }
   .hero-visual .badge{
     position:absolute; bottom:16px; left:16px; right:16px;
     background:rgba(23,22,42,0.72); backdrop-filter:blur(6px);
@@ -608,6 +639,11 @@
       <a href="#choti">Jodhpuri Choti (Gonde)</a>
       <a href="#pickup">Pickup Decoration</a>
     </nav>
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="productSearch" placeholder="Product dhundiye... (jaise: choti, wiper, cover)" oninput="performSearch(this.value)">
+      <button class="search-clear" id="searchClearBtn" onclick="document.getElementById('productSearch').value=''; performSearch('');" style="display:none;" aria-label="Search saaf karein">&times;</button>
+    </div>
   </div>
 </header>
 
@@ -630,14 +666,14 @@
         <span class="trust-badge">✓ Rishikesh Local Store</span>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="images/steering-cover-1.jpg" alt="Large Steering Jali Cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-      <div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; color:var(--malai-2); font-size:14px; text-align:center; padding:20px;">
-        Steering cover ki photo<br>yahan lagegi
-      </div>
+    <div class="hero-visual" id="heroCarousel">
+      <img class="hero-slide active" src="images/steering-cover-1.jpg" alt="Large Steering Jali Cover" data-name="Large Steering Jali Cover" data-price="₹149">
+      <img class="hero-slide" src="images/velvet-steering-cover-1.jpg" alt="Velvet Heavy Steering Cover" data-name="Velvet Heavy Steering Cover (Parrot Green)" data-price="₹199">
+      <img class="hero-slide" src="images/police-light-4box-1.jpg" alt="4 Box Police Light" data-name="4 Box Police Light (4 pcs)" data-price="₹320">
+      <img class="hero-slide" src="images/bolero-wiper-blade-2.jpg" alt="Bolero Wiper Blade" data-name="16&quot; Bolero Wiper Blade" data-price="₹199">
       <div class="badge">
-        <span>Large Steering Jali Cover</span>
-        <span class="price">₹149</span>
+        <span id="heroBadgeName">Large Steering Jali Cover</span>
+        <span class="price" id="heroBadgePrice">₹149</span>
       </div>
     </div>
   </div>
@@ -651,6 +687,11 @@
 
 <!-- ============ CATEGORY SECTIONS ============ -->
 <main class="wrap">
+  <div class="no-results" id="noResultsMsg">
+    <p style="font-size:17px; margin-bottom:8px;">😕 Koi product nahi mila</p>
+    <p>Directly <a href="https://wa.me/919997181187" target="_blank" rel="noopener">WhatsApp par poochiye</a>, shayad wo product available ho.</p>
+  </div>
+
 
   <!-- STEERING COVERS -->
   <section class="cat" id="steering">
@@ -1143,6 +1184,54 @@
       openLightbox(img.src, img.alt);
     });
   });
+
+  // ---------- Product search / filter ----------
+  function performSearch(query){
+    query = query.trim().toLowerCase();
+    var clearBtn = document.getElementById('searchClearBtn');
+    clearBtn.style.display = query ? 'block' : 'none';
+
+    var sections = document.querySelectorAll('section.cat');
+    var totalVisible = 0;
+
+    sections.forEach(function(sec){
+      if(query === ''){
+        sec.style.display = '';
+        sec.querySelectorAll('.grid > .card').forEach(function(card){ card.style.display = ''; });
+        return;
+      }
+      var h2 = sec.querySelector('h2');
+      var catNameMatches = h2 && h2.textContent.toLowerCase().indexOf(query) !== -1;
+      var cards = sec.querySelectorAll('.grid > .card');
+      var anyCardVisible = false;
+      cards.forEach(function(card){
+        var h3 = card.querySelector('h3');
+        var name = h3 ? h3.textContent.toLowerCase() : '';
+        var show = catNameMatches || name.indexOf(query) !== -1;
+        card.style.display = show ? '' : 'none';
+        if(show) anyCardVisible = true;
+      });
+      var showSection = catNameMatches || anyCardVisible;
+      sec.style.display = showSection ? '' : 'none';
+      if(showSection) totalVisible++;
+    });
+
+    document.getElementById('noResultsMsg').style.display = (query !== '' && totalVisible === 0) ? 'block' : 'none';
+  }
+
+  // ---------- Hero image carousel (auto-rotate every 4 seconds) ----------
+  (function(){
+    var slides = document.querySelectorAll('#heroCarousel .hero-slide');
+    if(slides.length < 2) return;
+    var current = 0;
+    setInterval(function(){
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+      document.getElementById('heroBadgeName').textContent = slides[current].getAttribute('data-name');
+      document.getElementById('heroBadgePrice').textContent = slides[current].getAttribute('data-price');
+    }, 4000);
+  })();
 
   // ---------- Quantity stepper ----------
   function changeQty(qid, delta){
