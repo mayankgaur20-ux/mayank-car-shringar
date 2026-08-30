@@ -459,6 +459,24 @@
     position:absolute; bottom:18px; left:0; right:0;
     text-align:center; color:var(--malai-2); font-size:12.5px;
   }
+  .lb-arrow{
+    all:unset; cursor:pointer;
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:48px; height:48px; border-radius:50%;
+    background:rgba(251,241,222,0.14); border:1px solid rgba(251,241,222,0.3);
+    color:var(--malai); font-size:30px; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .lb-arrow:hover{ background:var(--gainda); color:var(--raat); border-color:var(--gainda); }
+  .lb-arrow-left{ left:14px; }
+  .lb-arrow-right{ right:14px; }
+  .lb-arrow.hide{ display:none; }
+  @media (max-width:640px){
+    .lb-arrow{ width:40px; height:40px; font-size:24px; }
+    .lb-arrow-left{ left:6px; }
+    .lb-arrow-right{ right:6px; }
+  }
 
   /* ---------- Policies (Terms, Privacy, Shipping, Refund) ---------- */
   .policies{
@@ -730,7 +748,7 @@
     </div>
     <div class="grid">
       <div class="card" style="border-top-color:var(--gainda)">
-        <div class="thumb">
+        <div class="thumb" data-gallery="images/steering-cover-1.jpg,images/steering-cover-2.jpg,images/steering-cover-3.jpg,images/steering-cover-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="steeringMainImg" src="images/steering-cover-1.jpg" alt="Large Steering Jali Cover" onerror="this.style.display='none'; this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23514c6b\' stroke-width=\'1.5\'><circle cx=\'12\' cy=\'12\' r=\'9\'/><circle cx=\'12\' cy=\'12\' r=\'2.5\'/><path d=\'M12 3v4M12 17v4M3 12h4M17 12h4\'/></svg>'">
         </div>
@@ -754,7 +772,7 @@
 
 
       <div class="card" style="border-top-color:var(--popat)">
-        <div class="thumb">
+        <div class="thumb" data-gallery="images/velvet-steering-cover-1.jpg,images/velvet-steering-cover-2.jpg,images/velvet-steering-cover-3.jpg,images/velvet-steering-cover-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="velvetMainImg" src="images/velvet-steering-cover-1.jpg" alt="Velvet Heavy Steering Cover (T-Size) - Parrot Green">
         </div>
@@ -824,7 +842,7 @@
         </div>
       </div>
       <div class="card" style="border-top-color:var(--popat)">
-        <div class="thumb">
+        <div class="thumb" data-gallery="images/ice-blue-coin-light-1.jpg,images/ice-blue-coin-light-2.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="coinLightMainImg" src="images/ice-blue-coin-light-1.jpg" alt="Ice Blue Coin Light LED (12-Volt)">
         </div>
@@ -900,7 +918,7 @@
     </div>
     <div class="grid">
       <div class="card" style="border-top-color:var(--rani)">
-        <div class="thumb">
+        <div class="thumb" data-gallery="images/jodhpuri-choti-1.jpg,images/jodhpuri-choti-2.jpg,images/jodhpuri-choti-3.jpg,images/jodhpuri-choti-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="chotiMainImg" src="images/jodhpuri-choti-1.jpg" alt="20 Ladi Regular Choti / Gonde">
         </div>
@@ -935,7 +953,7 @@
     </div>
     <div class="grid">
       <div class="card" style="border-top-color:var(--gainda)">
-        <div class="thumb" style="position:relative;">
+        <div class="thumb" style="position:relative;" data-gallery="images/roof-ceiling-cloth-1.jpg,images/roof-ceiling-cloth-1.jpg,images/roof-ceiling-cloth-2.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="roofClothMainImg" src="images/roof-ceiling-cloth-1.jpg" alt="Truck Bolero Roof Ceiling Cloth (American Flag Design)">
           <button class="video-btn" onclick="event.stopPropagation(); openVideoLightbox('videos/roof-ceiling-cloth-1.mp4')">
@@ -960,7 +978,7 @@
         </div>
       </div>
       <div class="card" style="border-top-color:var(--sindoor)">
-        <div class="thumb">
+        <div class="thumb" data-gallery="images/bolero-wiper-blade-2.jpg,images/bolero-wiper-blade-2.jpg,images/bolero-wiper-blade-1.jpg,images/bolero-wiper-blade-3.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="wiperMainImg" src="images/bolero-wiper-blade-2.jpg" alt="16 inch Bolero Type Wiper Blade">
         </div>
@@ -1002,8 +1020,8 @@
   <div class="wrap" style="margin-top:36px;">
     <p style="color:var(--malai-2); font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; margin-bottom:14px;">Hamari Dukaan Ki Jhalak</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-      <img src="images/shop-interior-1.jpg" alt="Mayank Car Shringar shop interior" style="width:100%; border-radius:14px; cursor:zoom-in; aspect-ratio:16/9; object-fit:cover;" onclick="openLightbox(this.src, this.alt)">
-      <img src="images/shop-interior-2.jpg" alt="Mayank Car Shringar shop shelves with stock" style="width:100%; border-radius:14px; cursor:zoom-in; aspect-ratio:16/9; object-fit:cover;" onclick="openLightbox(this.src, this.alt)">
+      <img src="images/shop-interior-1.jpg" alt="Mayank Car Shringar shop interior" style="width:100%; border-radius:14px; cursor:zoom-in; aspect-ratio:16/9; object-fit:cover;" onclick="openLightbox(['images/shop-interior-1.jpg','images/shop-interior-2.jpg'], 0, this.alt)">
+      <img src="images/shop-interior-2.jpg" alt="Mayank Car Shringar shop shelves with stock" style="width:100%; border-radius:14px; cursor:zoom-in; aspect-ratio:16/9; object-fit:cover;" onclick="openLightbox(['images/shop-interior-1.jpg','images/shop-interior-2.jpg'], 1, this.alt)">
     </div>
     <p style="text-align:center; margin-top:22px; font-family:'Baloo 2'; font-size:17px; color:var(--gainda);">
       🙏 आइए, एक बार सेवा का मौका दीजिए — पूरी ईमानदारी से आपकी सेवा करेंगे।
@@ -1201,29 +1219,57 @@
 
 <div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
   <div class="lb-close" onclick="closeLightbox()" aria-label="Band karein">&times;</div>
+  <button class="lb-arrow lb-arrow-left" id="lbPrevBtn" onclick="event.stopPropagation(); lightboxPrev();" aria-label="Pichli photo">&#8249;</button>
   <img id="lightboxImg" src="" alt="Zoomed product photo">
+  <button class="lb-arrow lb-arrow-right" id="lbNextBtn" onclick="event.stopPropagation(); lightboxNext();" aria-label="Agli photo">&#8250;</button>
   <video id="lightboxVideo" controls playsinline style="display:none; max-width:min(92vw, 480px); max-height:88vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);"></video>
-  <div class="lb-hint">Band karne ke liye bahar click karein</div>
+  <div class="lb-hint" id="lbCounter">Band karne ke liye bahar click karein</div>
 </div>
 
 <script>
-  function openLightbox(src, alt){
+  var lbImages = [];
+  var lbIndex = 0;
+
+  function openLightbox(images, index, alt){
+    lbImages = images;
+    lbIndex = index;
     var lb = document.getElementById('lightbox');
-    var img = document.getElementById('lightboxImg');
     var vid = document.getElementById('lightboxVideo');
     vid.pause();
     vid.style.display = 'none';
-    img.style.display = 'block';
-    img.src = src;
-    img.alt = alt || 'Zoomed product photo';
+    document.getElementById('lightboxImg').style.display = 'block';
+    showLightboxImage(alt);
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+  function showLightboxImage(alt){
+    var img = document.getElementById('lightboxImg');
+    img.src = lbImages[lbIndex];
+    img.alt = alt || 'Zoomed product photo';
+    var multi = lbImages.length > 1;
+    document.getElementById('lbPrevBtn').classList.toggle('hide', !multi);
+    document.getElementById('lbNextBtn').classList.toggle('hide', !multi);
+    document.getElementById('lbCounter').textContent = multi
+      ? (lbIndex + 1) + ' / ' + lbImages.length + ' — bahar click karke band karein'
+      : 'Band karne ke liye bahar click karein';
+  }
+  function lightboxPrev(){
+    if(lbImages.length < 2) return;
+    lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+    showLightboxImage();
+  }
+  function lightboxNext(){
+    if(lbImages.length < 2) return;
+    lbIndex = (lbIndex + 1) % lbImages.length;
+    showLightboxImage();
   }
   function openVideoLightbox(src){
     var lb = document.getElementById('lightbox');
     var img = document.getElementById('lightboxImg');
     var vid = document.getElementById('lightboxVideo');
     img.style.display = 'none';
+    document.getElementById('lbPrevBtn').classList.add('hide');
+    document.getElementById('lbNextBtn').classList.add('hide');
     vid.style.display = 'block';
     vid.src = src;
     lb.classList.add('open');
@@ -1236,13 +1282,37 @@
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', function(e){
+    if(!document.getElementById('lightbox').classList.contains('open')) return;
     if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') lightboxPrev();
+    if(e.key === 'ArrowRight') lightboxNext();
   });
+  // Swipe support for mobile
+  (function(){
+    var touchStartX = 0;
+    var lbEl = document.getElementById('lightbox');
+    lbEl.addEventListener('touchstart', function(e){ touchStartX = e.changedTouches[0].clientX; });
+    lbEl.addEventListener('touchend', function(e){
+      var diff = e.changedTouches[0].clientX - touchStartX;
+      if(Math.abs(diff) > 40){
+        if(diff > 0) lightboxPrev(); else lightboxNext();
+      }
+    });
+  })();
   // Attach zoom-on-click to main product/hero images (not the small gallery-switch thumbnails)
   document.querySelectorAll('.card .thumb img, .hero-visual img').forEach(function(img){
     img.addEventListener('click', function(e){
       e.stopPropagation();
-      openLightbox(img.src, img.alt);
+      var thumbDiv = img.closest('.thumb') || img.closest('.hero-visual');
+      var galleryAttr = thumbDiv ? thumbDiv.getAttribute('data-gallery') : null;
+      if(galleryAttr){
+        var images = galleryAttr.split(',');
+        var idx = images.indexOf(img.getAttribute('src'));
+        if(idx === -1) idx = 0;
+        openLightbox(images, idx, img.alt);
+      } else {
+        openLightbox([img.getAttribute('src')], 0, img.alt);
+      }
     });
   });
 
