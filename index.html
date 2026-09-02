@@ -361,8 +361,7 @@
   }
   /* Photo gallery / more angles */
   .gallery-strip{
-    display:flex; gap:6px; padding:8px;
-    background:#fff;
+    display:none;
   }
   .gallery-strip button{
     all:unset; cursor:pointer;
@@ -827,6 +826,24 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
+      <div class="card" style="border-top-color:var(--gainda)">
+        <div class="thumb" data-gallery="images/fast-charger-1.jpg,images/fast-charger-2.jpg,images/fast-charger-3.jpg,images/fast-charger-4.jpg">
+          <span class="real-tag">✓ Real Photo</span>
+          <span class="discount-badge">30% OFF</span>
+          <img src="images/fast-charger-1.jpg" alt="Robotek Fast Car Charger (12V/24V)">
+        </div>
+        <div class="body">
+          <h3>Robotek Fast Charger for Car/Pickup — Android/iPhone<br><span style="font-weight:500; font-size:12.5px; color:var(--ink-soft);">फ़ास्ट चार्जर — 12V/24V कॉमन, Type C Cable ke saath</span></h3>
+          <div class="price-row"><span class="price">₹349</span><span style="text-decoration:line-through; color:var(--ink-soft); font-size:13px;">₹499</span></div>
+          <span class="shipping">Shipping Charges Extra</span>
+          <div class="qty-stepper" id="qty-21"><button type="button" onclick="changeQty('qty-21', -1)">−</button><span class="qty-value" id="qty-21-val">1</span><button type="button" onclick="changeQty('qty-21', 1)">+</button></div>
+          <button class="order-btn" onclick="orderSingleProduct('Robotek Fast Charger for Car/Pickup', '₹349', 'qty-21')">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg>
+            WhatsApp par Order Karein
+          </button>
+          <button class="addcart-btn" data-name="Robotek Fast Charger for Car/Pickup" data-price="₹349" onclick="addOrUpdateCartItem('Robotek Fast Charger for Car/Pickup', '₹349', 'qty-21', this)">+ Order List mein Add Karein</button>
+        </div>
+      </div>
       <div class="card" style="border-top-color:var(--popat)">
         <div class="thumb" style="position:relative;" data-gallery="images/led-antenna-1.jpg,images/led-antenna-2.jpg,images/led-antenna-3.jpg">
           <span class="real-tag">✓ Real Photo</span>
