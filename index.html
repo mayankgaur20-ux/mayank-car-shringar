@@ -319,15 +319,15 @@
 
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+    gap:12px;
   }
   .card{
     background:#fff;
-    border-radius:var(--radius);
+    border-radius:12px;
     overflow:hidden;
     box-shadow:var(--shadow);
-    border-top:5px solid var(--gainda);
+    border-top:4px solid var(--gainda);
     display:flex; flex-direction:column;
     transition:transform .18s ease, box-shadow .18s ease;
   }
@@ -341,23 +341,23 @@
   .card .thumb img{width:100%; height:100%; object-fit:cover;}
   .card .thumb svg{width:46%; height:46%; opacity:.55;}
   .card .thumb .real-tag{
-    position:absolute; top:10px; left:10px;
+    position:absolute; top:6px; left:6px;
     background:var(--popat); color:#fff;
-    font-size:10.5px; font-weight:700; letter-spacing:.03em;
-    padding:4px 9px; border-radius:999px;
+    font-size:9px; font-weight:700; letter-spacing:.02em;
+    padding:3px 7px; border-radius:999px;
   }
   .card .thumb .discount-badge{
-    position:absolute; top:10px; right:10px;
+    position:absolute; top:6px; right:6px;
     background:var(--sindoor); color:#fff;
-    font-size:11px; font-weight:800; letter-spacing:.02em;
-    padding:4px 10px; border-radius:999px;
+    font-size:9.5px; font-weight:800; letter-spacing:.01em;
+    padding:3px 7px; border-radius:999px;
     box-shadow:0 3px 8px rgba(217,59,59,0.4);
   }
   .card .thumb .sample-tag{
-    position:absolute; top:10px; left:10px;
+    position:absolute; top:6px; left:6px;
     background:rgba(23,22,42,0.55); color:var(--malai);
-    font-size:10.5px; font-weight:700; letter-spacing:.03em;
-    padding:4px 9px; border-radius:999px;
+    font-size:9px; font-weight:700; letter-spacing:.02em;
+    padding:3px 7px; border-radius:999px;
   }
   /* Photo gallery / more angles */
   .gallery-strip{
@@ -372,21 +372,21 @@
   }
   .gallery-strip button.active{ border-color:var(--gainda); }
   .gallery-strip img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .card .body{padding:16px 16px 18px; display:flex; flex-direction:column; gap:10px; flex:1;}
-  .card h3{font-family:'Mukta'; font-weight:700; font-size:15px; color:var(--ink); line-height:1.35;}
-  .card .price-row{display:flex; align-items:baseline; gap:8px; margin-top:auto;}
-  .card .price{font-family:'Baloo 2'; font-weight:700; font-size:19px; color:var(--sindoor);}
-  .card .shipping{font-size:11.5px; color:var(--ink-soft); font-style:italic;}
+  .card .body{padding:10px 10px 12px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .card h3{font-family:'Mukta'; font-weight:700; font-size:12.5px; color:var(--ink); line-height:1.3;}
+  .card .price-row{display:flex; align-items:baseline; gap:6px; margin-top:auto;}
+  .card .price{font-family:'Baloo 2'; font-weight:700; font-size:15.5px; color:var(--sindoor);}
+  .card .shipping{font-size:10px; color:var(--ink-soft); font-style:italic;}
   .card .order-btn{
-    margin-top:6px;
-    display:flex; align-items:center; justify-content:center; gap:7px;
+    margin-top:4px;
+    display:flex; align-items:center; justify-content:center; gap:5px;
     background:var(--raat); color:var(--malai);
-    padding:10px; border-radius:10px;
-    font-weight:600; font-size:13.5px;
+    padding:7px; border-radius:8px;
+    font-weight:600; font-size:11.5px;
     transition:.15s ease;
   }
   .card .order-btn:hover{background:var(--popat); color:#fff;}
-  .card .order-btn svg{width:15px; height:15px;}
+  .card .order-btn svg{width:13px; height:13px;}
 
   /* ---------- About strip ---------- */
   .about{
@@ -523,39 +523,39 @@
   /* ---------- Order List (multi-product cart) ---------- */
   .qty-stepper{
     display:flex; align-items:center; justify-content:center; gap:0;
-    margin-top:8px;
+    margin-top:4px;
     border:1.5px solid var(--line-2, rgba(0,0,0,0.15));
-    border-radius:10px;
+    border-radius:8px;
     overflow:hidden;
     width:fit-content;
   }
   .qty-stepper button{
     all:unset; cursor:pointer;
-    width:34px; height:34px;
+    width:26px; height:26px;
     display:flex; align-items:center; justify-content:center;
-    font-size:17px; font-weight:700; color:var(--ink);
+    font-size:14px; font-weight:700; color:var(--ink);
     background:#f5efe0;
   }
   .qty-stepper button:hover{ background:var(--gainda); color:#fff; }
   .qty-stepper .qty-value{
-    width:38px; text-align:center; font-weight:700; font-size:14px; color:var(--ink);
+    width:28px; text-align:center; font-weight:700; font-size:11.5px; color:var(--ink);
   }
   .video-btn{
-    position:absolute; bottom:10px; right:10px;
+    position:absolute; bottom:6px; right:6px;
     background:rgba(23,22,42,0.75); color:#fff;
     border:none; border-radius:999px;
-    padding:6px 12px; font-size:11.5px; font-weight:700;
-    display:flex; align-items:center; gap:5px;
+    padding:4px 8px; font-size:9.5px; font-weight:700;
+    display:flex; align-items:center; gap:3px;
     cursor:pointer;
   }
   .video-btn:hover{ background:var(--sindoor); }
-  .video-btn svg{ width:12px; height:12px; }
+  .video-btn svg{ width:10px; height:10px; }
   .addcart-btn{
     all:unset; box-sizing:border-box; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
-    width:100%; padding:9px; margin-top:6px;
-    border:1.5px solid var(--gainda); border-radius:10px;
-    color:var(--gainda); font-weight:600; font-size:12.5px;
+    width:100%; padding:6px; margin-top:4px;
+    border:1.5px solid var(--gainda); border-radius:8px;
+    color:var(--gainda); font-weight:600; font-size:10px;
     text-align:center;
     transition:.15s ease;
   }
@@ -679,15 +679,15 @@
       </div>
     </div>
     <nav class="catnav">
-      <a href="#top" style="background:var(--gainda); color:var(--raat); border-color:var(--gainda);">🏠 Home</a>
-      <a href="#steering">Steering Covers</a>
-      <a href="#wheelcaps">Wheel Caps</a>
-      <a href="#lights">Parking Lights</a>
-      <a href="#horns">Horns</a>
-      <a href="#fans">Fans</a>
-      <a href="#foglamps">Fog Lamps</a>
-      <a href="#choti">Jodhpuri Choti (Gonde)</a>
-      <a href="#pickup">Pickup Decoration</a>
+      <a href="#top" onclick="showCategory('all')" style="background:var(--gainda); color:var(--raat); border-color:var(--gainda);">🏠 Home</a>
+      <a href="#steering" onclick="showCategory('steering')">Steering Covers</a>
+      <a href="#wheelcaps" onclick="showCategory('wheelcaps')">Wheel Caps</a>
+      <a href="#lights" onclick="showCategory('lights')">Parking Lights</a>
+      <a href="#horns" onclick="showCategory('horns')">Horns</a>
+      <a href="#fans" onclick="showCategory('fans')">Fans</a>
+      <a href="#foglamps" onclick="showCategory('foglamps')">Fog Lamps</a>
+      <a href="#choti" onclick="showCategory('choti')">Jodhpuri Choti (Gonde)</a>
+      <a href="#pickup" onclick="showCategory('pickup')">Pickup Decoration</a>
     </nav>
     <div class="search-bar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1469,6 +1469,37 @@
       }
     });
   });
+
+  // ---------- Category filter (show only clicked category) ----------
+  function showCategory(catId){
+    var sections = document.querySelectorAll('section.cat');
+    sections.forEach(function(sec){
+      sec.style.display = (catId === 'all' || sec.id === catId) ? '' : 'none';
+    });
+    // Clear any active search so it doesn't hide the chosen category
+    var searchInput = document.getElementById('productSearch');
+    if(searchInput && searchInput.value){
+      searchInput.value = '';
+      document.getElementById('searchClearBtn').style.display = 'none';
+      document.getElementById('noResultsMsg').style.display = 'none';
+    }
+    // Highlight active nav link
+    document.querySelectorAll('.catnav a').forEach(function(a){
+      a.style.background = '';
+      a.style.color = '';
+      a.style.borderColor = '';
+    });
+    var links = document.querySelectorAll('.catnav a');
+    links.forEach(function(a){
+      var isHome = catId === 'all' && a.textContent.indexOf('Home') !== -1;
+      var isMatch = a.getAttribute('href') === '#' + catId;
+      if(isHome || isMatch){
+        a.style.background = 'var(--gainda)';
+        a.style.color = 'var(--raat)';
+        a.style.borderColor = 'var(--gainda)';
+      }
+    });
+  }
 
   // ---------- Product search / filter ----------
   function performSearch(query){
