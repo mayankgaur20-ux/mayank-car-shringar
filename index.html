@@ -466,6 +466,7 @@
     transition:.15s ease;
   }
   .catnav a:hover{background:var(--gainda); color:var(--raat); border-color:var(--gainda);}
+  .catnav a.tag-chip-active{background:var(--gainda); color:var(--raat); border-color:var(--gainda);}
 
   .search-bar{
     display:flex; align-items:center; gap:8px;
@@ -866,6 +867,20 @@
   }
   .addcart-btn.added::before{ content:'✓ '; }
 
+  .share-row{
+    display:flex; gap:6px; margin-top:6px;
+  }
+  .share-btn{
+    all:unset; box-sizing:border-box; cursor:pointer;
+    flex:1;
+    display:flex; align-items:center; justify-content:center;
+    padding:6px; border-radius:8px;
+    background:#f5efe0; color:var(--ink-soft);
+    transition:.15s ease;
+  }
+  .share-btn:hover{ background:var(--gainda); color:var(--raat); }
+  .share-btn svg{ width:14px; height:14px; }
+
   .float-cart{
     position:fixed; bottom:22px; right:90px; z-index:60;
     background:var(--raat); color:var(--malai);
@@ -1019,6 +1034,15 @@
       <input type="text" id="productSearch" placeholder="Product dhundiye... (jaise: choti, wiper, cover)" oninput="performSearch(this.value)">
       <button class="search-clear" id="searchClearBtn" onclick="document.getElementById('productSearch').value=''; performSearch('');" style="display:none;" aria-label="Search saaf karein">&times;</button>
     </div>
+    <div class="catnav" id="tagFilterRow" style="padding-top:0; padding-bottom:12px;">
+      <a href="#" onclick="event.preventDefault(); filterByTag('all', this)" class="tag-chip-active">Sab</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('Interior', this)">Interior</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('Exterior', this)">Exterior</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('LED', this)">LED</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('Lighting', this)">Lighting</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('Cleaning', this)">Cleaning</a>
+      <a href="#" onclick="event.preventDefault(); filterByTag('Decoration', this)">Decoration</a>
+    </div>
   </div>
 </header>
 
@@ -1064,6 +1088,30 @@
   </div>
 </section>
 
+<!-- ============ POPULAR PICKS ============ -->
+<section class="wrap" style="padding:36px 24px 8px;">
+  <div class="cat-eyebrow" style="margin-bottom:8px;"><span class="dot" style="background:var(--gainda)"></span>Sabse Zyada Pasand Kiye Jaane Wale</div>
+  <h2 style="font-family:'Baloo 2'; font-size:clamp(20px,3vw,26px); color:var(--ink); margin-bottom:16px;">⭐ Popular Picks</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px;">
+    <a href="#product-9" onclick="trackEvent('popular_pick_click','Police Light')" style="text-decoration:none; color:inherit; background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); border-top:4px solid var(--sindoor); display:block;">
+      <img src="images/police-light-4box-1.jpg" alt="4 Box Police Light" loading="lazy" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+      <div style="padding:10px;"><div style="font-size:12px; font-weight:700; color:var(--ink); line-height:1.3;">4 Box Police Light</div><div style="font-family:'Baloo 2'; font-weight:700; color:var(--sindoor); font-size:15px; margin-top:4px;">₹320</div></div>
+    </a>
+    <a href="#product-4" onclick="trackEvent('popular_pick_click','Star Light')" style="text-decoration:none; color:inherit; background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); border-top:4px solid var(--gainda); display:block;">
+      <img src="images/star-light-metal-3.jpg" alt="Big Star Light" loading="lazy" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+      <div style="padding:10px;"><div style="font-size:12px; font-weight:700; color:var(--ink); line-height:1.3;">Big Star Light</div><div style="font-family:'Baloo 2'; font-weight:700; color:var(--sindoor); font-size:15px; margin-top:4px;">₹249</div></div>
+    </a>
+    <a href="#product-15" onclick="trackEvent('popular_pick_click','Fortuner Mirror')" style="text-decoration:none; color:inherit; background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); border-top:4px solid var(--popat); display:block;">
+      <img src="images/fortuner-bonnet-mirror-1.jpg" alt="Fortuner Bonnet Mirror" loading="lazy" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+      <div style="padding:10px;"><div style="font-size:12px; font-weight:700; color:var(--ink); line-height:1.3;">Fortuner Bonnet Mirror</div><div style="font-family:'Baloo 2'; font-weight:700; color:var(--sindoor); font-size:15px; margin-top:4px;">₹499</div></div>
+    </a>
+    <a href="#product-17" onclick="trackEvent('popular_pick_click','Bolero Wiper Blade')" style="text-decoration:none; color:inherit; background:#fff; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); border-top:4px solid var(--rani); display:block;">
+      <img src="images/bolero-wiper-blade-2.jpg" alt="Bolero Wiper Blade" loading="lazy" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+      <div style="padding:10px;"><div style="font-size:12px; font-weight:700; color:var(--ink); line-height:1.3;">Bolero Wiper Blade</div><div style="font-family:'Baloo 2'; font-weight:700; color:var(--sindoor); font-size:15px; margin-top:4px;">₹199</div></div>
+    </a>
+  </div>
+</section>
+
 <!-- ============ CATEGORY SECTIONS ============ -->
 <main class="wrap">
   <div class="no-results" id="noResultsMsg">
@@ -1082,7 +1130,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-1" data-tags="Interior" style="border-top-color:var(--gainda)">
         <div class="thumb" data-gallery="images/steering-cover-1.jpg,images/steering-cover-2.jpg,images/steering-cover-3.jpg,images/steering-cover-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="steeringMainImg" src="images/steering-cover-1.jpg" alt="Large Steering Jali Cover" onerror="this.style.display='none'; this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23514c6b\' stroke-width=\'1.5\'><circle cx=\'12\' cy=\'12\' r=\'9\'/><circle cx=\'12\' cy=\'12\' r=\'2.5\'/><path d=\'M12 3v4M12 17v4M3 12h4M17 12h4\'/></svg>'">
@@ -1102,11 +1150,12 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Large Steering Jali Cover" data-price="₹149" onclick="addOrUpdateCartItem('Large Steering Jali Cover', '₹149', 'qty-1', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Large Steering Jali Cover', '₹149', 'product-1')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-1')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-1', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
 
 
-      <div class="card" style="border-top-color:var(--popat)">
+      <div class="card" id="product-2" data-tags="Interior" style="border-top-color:var(--popat)">
         <div class="thumb" data-gallery="images/velvet-steering-cover-1.jpg,images/velvet-steering-cover-2.jpg,images/velvet-steering-cover-3.jpg,images/velvet-steering-cover-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="velvetMainImg" src="images/velvet-steering-cover-1.jpg" alt="Velvet Heavy Steering Cover (T-Size) - Parrot Green" loading="lazy">
@@ -1126,6 +1175,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Velvet Heavy Steering Cover (T-Size) – Parrot Green - वेलवेट हेवी स्टीयरिंग कवर (T-साइज) – पैरेट ग्रीन (तोतिया हरा), 15 इंच" data-price="₹199" onclick="addOrUpdateCartItem('Velvet Heavy Steering Cover (T-Size) – Parrot Green - वेलवेट हेवी स्टीयरिंग कवर (T-साइज) – पैरेट ग्रीन (तोतिया हरा), 15 इंच', '₹199', 'qty-3', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Velvet Heavy Steering Cover (T-Size) – Parrot Green - वेलवेट हेवी स्टीयरिंग कवर (T-साइज) – पैरेट ग्रीन (तोतिया हरा), 15 इंच', '₹199', 'product-2')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-2')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-2', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1141,7 +1191,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--sindoor)">
+      <div class="card" id="product-3" data-tags="Exterior" style="border-top-color:var(--sindoor)">
         <div class="thumb" data-gallery="images/truck-wheel-cover-1.jpg,images/truck-wheel-cover-2.jpg,images/truck-wheel-cover-3.jpg,images/truck-wheel-cover-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">21% OFF</span>
@@ -1157,6 +1207,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Premium Fibre White Wheel Cover for Truck (20 Inch) / प्रीमियम फाइबर व्हाइट व्हील कवर" data-price="₹949" onclick="addOrUpdateCartItem('Premium Fibre White Wheel Cover for Truck (20 Inch) / प्रीमियम फाइबर व्हाइट व्हील कवर', '₹949', 'qty-22', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Premium Fibre White Wheel Cover for Truck (20 Inch) / प्रीमियम फाइबर व्हाइट व्हील कवर', '₹949', 'product-3')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-3')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-3', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1172,7 +1223,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--sindoor)">
+      <div class="card" id="product-4" data-tags="LED,Lighting,Exterior,Decoration" style="border-top-color:var(--sindoor)">
         <div class="thumb" data-gallery="images/star-light-metal-3.jpg,images/star-light-metal-1.jpg,images/star-light-metal-2.jpg,images/star-light-metal-4.jpg,images/star-light-metal-5.jpg,images/star-light-metal-6.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">58% OFF</span>
@@ -1188,9 +1239,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="New Big Star Light (Metal, 12V/24V Common) / स्टार लाइट" data-price="₹249" onclick="addOrUpdateCartItem('New Big Star Light (Metal, 12V/24V Common) / स्टार लाइट', '₹249', 'qty-26', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('New Big Star Light (Metal, 12V/24V Common) / स्टार लाइट', '₹249', 'product-4')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-4')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-4', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-5" data-tags="Interior" style="border-top-color:var(--gainda)">
         <div class="thumb" data-gallery="images/fast-charger-1.jpg,images/fast-charger-2.jpg,images/fast-charger-3.jpg,images/fast-charger-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">30% OFF</span>
@@ -1206,9 +1258,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Robotek Fast Charger for Car/Pickup" data-price="₹349" onclick="addOrUpdateCartItem('Robotek Fast Charger for Car/Pickup', '₹349', 'qty-21', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Robotek Fast Charger for Car/Pickup', '₹349', 'product-5')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-5')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-5', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--popat)">
+      <div class="card" id="product-6" data-tags="LED,Exterior,Decoration" style="border-top-color:var(--popat)">
         <div class="thumb" style="position:relative;" data-gallery="images/led-antenna-1.jpg,images/led-antenna-2.jpg,images/led-antenna-3.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">22% OFF</span>
@@ -1233,9 +1286,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="3 Feet LED Antenna (12-Volt)" data-price="₹349" onclick="addOrUpdateCartItem('3 Feet LED Antenna (12-Volt)', '₹349', 'qty-20', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('3 Feet LED Antenna (12-Volt)', '₹349', 'product-6')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-6')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-6', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--rani)">
+      <div class="card" id="product-7" data-tags="LED,Lighting,Exterior" style="border-top-color:var(--rani)">
         <div class="thumb" data-gallery="images/8lens-fog-lamp-js48-1.jpg,images/8lens-fog-lamp-js48-2.jpg,images/8lens-fog-lamp-js48-3.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">30% OFF</span>
@@ -1256,9 +1310,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="8 Lens Fog Lamp - SSLG JS48 Pro" data-price="₹800" onclick="addOrUpdateCartItem('8 Lens Fog Lamp - SSLG JS48 Pro', '₹800', 'qty-19', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('8 Lens Fog Lamp - SSLG JS48 Pro', '₹800', 'product-7')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-7')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-7', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-8" data-tags="LED,Lighting,Exterior" style="border-top-color:var(--gainda)">
         <div class="thumb" style="position:relative;" data-gallery="images/4lens-fog-lamp-1.jpg,images/4lens-fog-lamp-2.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="fogLampMainImg" src="images/4lens-fog-lamp-1.jpg" alt="4 Lens Fog Lamp (12-Volt)" loading="lazy">
@@ -1281,9 +1336,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="4 Lens Iron Body Fog Lamp (12-Volt) - White + Yellow" data-price="₹350" onclick="addOrUpdateCartItem('4 Lens Iron Body Fog Lamp (12-Volt) - White + Yellow', '₹350', 'qty-18', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('4 Lens Iron Body Fog Lamp (12-Volt) - White + Yellow', '₹350', 'product-8')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-8')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-8', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--sindoor)">
+      <div class="card" id="product-9" data-tags="LED,Lighting,Exterior,Decoration" style="border-top-color:var(--sindoor)">
         <div class="thumb" style="position:relative;">
           <span class="real-tag">✓ Real Photo</span>
           <img src="images/police-light-4box-1.jpg" alt="4 Box Police Light (4 pcs, 12-Volt)" loading="lazy">
@@ -1303,9 +1359,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="4 Box Police Light (4 pcs) - 12-Volt" data-price="₹320" onclick="addOrUpdateCartItem('4 Box Police Light (4 pcs) - 12-Volt', '₹320', 'qty-16', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('4 Box Police Light (4 pcs) - 12-Volt', '₹320', 'product-9')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-9')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-9', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--popat)">
+      <div class="card" id="product-10" data-tags="LED,Lighting,Exterior" style="border-top-color:var(--popat)">
         <div class="thumb" data-gallery="images/ice-blue-coin-light-1.jpg,images/ice-blue-coin-light-2.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="coinLightMainImg" src="images/ice-blue-coin-light-1.jpg" alt="Ice Blue Coin Light LED (12-Volt)" loading="lazy">
@@ -1324,6 +1381,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Ice Blue Coin Light LED (12-Volt)" data-price="₹10 per LED" onclick="addOrUpdateCartItem('Ice Blue Coin Light LED (12-Volt)', '₹10 per LED', 'qty-7', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Ice Blue Coin Light LED (12-Volt)', '₹10 per LED', 'product-10')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-10')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-10', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1353,7 +1411,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-11" data-tags="Interior" style="border-top-color:var(--gainda)">
         <div class="thumb" data-gallery="images/led-fan-6inch-1.jpg,images/led-fan-6inch-2.jpg,images/led-fan-6inch-3.jpg,images/led-fan-6inch-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">48% OFF</span>
@@ -1369,6 +1427,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="6 inch LED Fan (12-Volt) - Unbreakable Fiber Body / 6 इंच फैन" data-price="₹599" onclick="addOrUpdateCartItem('6 inch LED Fan (12-Volt) - Unbreakable Fiber Body / 6 इंच फैन', '₹599', 'qty-23', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('6 inch LED Fan (12-Volt) - Unbreakable Fiber Body / 6 इंच फैन', '₹599', 'product-11')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-11')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-11', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1398,7 +1457,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--rani)">
+      <div class="card" id="product-12" data-tags="Decoration,Exterior" style="border-top-color:var(--rani)">
         <div class="thumb" data-gallery="images/jodhpuri-choti-1.jpg,images/jodhpuri-choti-2.jpg,images/jodhpuri-choti-3.jpg,images/jodhpuri-choti-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="chotiMainImg" src="images/jodhpuri-choti-1.jpg" alt="20 Ladi Regular Choti / Gonde" loading="lazy">
@@ -1418,6 +1477,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="20 Ladi Regular Choti (Full Size) - 20 लड़ी रेगुलर चोटी / 20 गोंडे" data-price="₹449" onclick="addOrUpdateCartItem('20 Ladi Regular Choti (Full Size) - 20 लड़ी रेगुलर चोटी / 20 गोंडे', '₹449', 'qty-13', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('20 Ladi Regular Choti (Full Size) - 20 लड़ी रेगुलर चोटी / 20 गोंडे', '₹449', 'product-12')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-12')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-12', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1433,7 +1493,7 @@
       <span class="cat-count">Aapki photo ke saath</span>
     </div>
     <div class="grid">
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-13" data-tags="Interior" style="border-top-color:var(--gainda)">
         <div class="thumb" data-gallery="images/robotek-gati-dc-charger-1.jpg,images/robotek-gati-dc-charger-2.jpg,images/robotek-gati-dc-charger-3.jpg,images/robotek-gati-dc-charger-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">18% OFF</span>
@@ -1449,9 +1509,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Robotek USB + C Type Charger - Fast Charging (18W) / रोबोटेक चार्जर" data-price="₹370" onclick="addOrUpdateCartItem('Robotek USB + C Type Charger - Fast Charging (18W) / रोबोटेक चार्जर', '₹370', 'qty-27', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Robotek USB + C Type Charger - Fast Charging (18W) / रोबोटेक चार्जर', '₹370', 'product-13')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-13')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-13', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--rani)">
+      <div class="card" id="product-14" data-tags="Interior,Decoration" style="border-top-color:var(--rani)">
         <div class="thumb" data-gallery="images/blue-dashboard-cloth-1.jpg,images/blue-dashboard-cloth-2.jpg,images/blue-dashboard-cloth-3.jpg,images/blue-dashboard-cloth-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">38% OFF</span>
@@ -1467,9 +1528,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Blue Color Dashboard Kapda - Premium Quality / नीले रंग डैशबोर्ड कपड़ा" data-price="₹249" onclick="addOrUpdateCartItem('Blue Color Dashboard Kapda - Premium Quality / नीले रंग डैशबोर्ड कपड़ा', '₹249', 'qty-25', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Blue Color Dashboard Kapda - Premium Quality / नीले रंग डैशबोर्ड कपड़ा', '₹249', 'product-14')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-14')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-14', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--popat)">
+      <div class="card" id="product-15" data-tags="Exterior" style="border-top-color:var(--popat)">
         <div class="thumb" data-gallery="images/fortuner-bonnet-mirror-1.jpg,images/fortuner-bonnet-mirror-2.jpg,images/fortuner-bonnet-mirror-3.jpg,images/fortuner-bonnet-mirror-4.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <span class="discount-badge">57% OFF</span>
@@ -1485,9 +1547,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Fortuner Bonnet Mirror (White) - Heavy Quality, Adjustable / फॉर्च्यूनर बोनट मिरर" data-price="₹499" onclick="addOrUpdateCartItem('Fortuner Bonnet Mirror (White) - Heavy Quality, Adjustable / फॉर्च्यूनर बोनट मिरर', '₹499', 'qty-24', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Fortuner Bonnet Mirror (White) - Heavy Quality, Adjustable / फॉर्च्यूनर बोनट मिरर', '₹499', 'product-15')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-15')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-15', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--gainda)">
+      <div class="card" id="product-16" data-tags="Interior,Decoration" style="border-top-color:var(--gainda)">
         <div class="thumb" style="position:relative;" data-gallery="images/roof-ceiling-cloth-1.jpg,images/roof-ceiling-cloth-1.jpg,images/roof-ceiling-cloth-2.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="roofClothMainImg" src="images/roof-ceiling-cloth-1.jpg" alt="Truck Bolero Roof Ceiling Cloth (American Flag Design)" loading="lazy">
@@ -1511,9 +1574,10 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="Truck/Bolero Roof Ceiling Cloth (American Flag Design)" data-price="₹499" onclick="addOrUpdateCartItem('Truck/Bolero Roof Ceiling Cloth (American Flag Design)', '₹499', 'qty-17', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('Truck/Bolero Roof Ceiling Cloth (American Flag Design)', '₹499', 'product-16')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-16')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-16', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
-      <div class="card" style="border-top-color:var(--sindoor)">
+      <div class="card" id="product-17" data-tags="Exterior,Cleaning" style="border-top-color:var(--sindoor)">
         <div class="thumb" data-gallery="images/bolero-wiper-blade-2.jpg,images/bolero-wiper-blade-2.jpg,images/bolero-wiper-blade-1.jpg,images/bolero-wiper-blade-3.jpg">
           <span class="real-tag">✓ Real Photo</span>
           <img id="wiperMainImg" src="images/bolero-wiper-blade-2.jpg" alt="16 inch Bolero Type Wiper Blade" loading="lazy">
@@ -1534,6 +1598,7 @@
             WhatsApp par Order Karein
           </button>
           <button class="addcart-btn" data-name="16 inch Thar Type Bolero Wiper Blade (2 pcs) - Valeo Brand" data-price="₹199" onclick="addOrUpdateCartItem('16 inch Thar Type Bolero Wiper Blade (2 pcs) - Valeo Brand', '₹199', 'qty-15', this)">+ Order List mein Add Karein</button>
+          <div class="share-row"><button class="share-btn" onclick="shareWhatsApp('16 inch Thar Type Bolero Wiper Blade (2 pcs) - Valeo Brand', '₹199', 'product-17')" aria-label="WhatsApp par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.51 2 12.04 2zm5.8 14.1c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.13.11-1.82-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.2-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.26-.28.57-.35.77-.35h.55c.18 0 .42-.03.65.5.24.56.81 1.94.88 2.08.07.14.12.3.02.49-.1.19-.15.3-.29.46-.15.17-.31.37-.44.5-.15.15-.3.31-.13.6.17.3.76 1.25 1.64 2.02 1.13.99 2.07 1.3 2.38 1.44.31.14.49.12.67-.07.18-.2.77-.9.98-1.2.2-.31.4-.26.68-.15.28.1 1.78.84 2.08 1 .3.15.5.22.57.35.08.13.08.75-.16 1.43z"/></svg></button><button class="share-btn" onclick="shareFacebook('product-17')" aria-label="Facebook par share karein"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></button><button class="share-btn" onclick="copyProductLink('product-17', this)" aria-label="Link copy karein"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button></div>
         </div>
       </div>
     </div>
@@ -1891,13 +1956,57 @@
     });
   });
 
+  // ---------- Product View tracking (fires once when a product card scrolls into view) ----------
+  (function(){
+    if(!('IntersectionObserver' in window)) return;
+    var seen = new WeakSet();
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !seen.has(entry.target)){
+          seen.add(entry.target);
+          var h3 = entry.target.querySelector('h3');
+          var name = h3 ? h3.textContent.trim().split('\n')[0] : 'Unknown product';
+          trackEvent('product_view', name, { product_name: name });
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.grid > .card').forEach(function(card){
+      observer.observe(card);
+    });
+  })();
+
   // ---------- Category filter (show only clicked category) ----------
+  // ---------- Tag-based filter (Interior/Exterior/LED/Lighting/Cleaning/Decoration) ----------
+  function filterByTag(tag, clickedEl){
+    trackEvent('tag_filter_click', tag);
+    document.querySelectorAll('#tagFilterRow a').forEach(function(a){ a.classList.remove('tag-chip-active'); });
+    if(clickedEl) clickedEl.classList.add('tag-chip-active');
+
+    var sections = document.querySelectorAll('section.cat');
+    sections.forEach(function(sec){
+      var cards = sec.querySelectorAll('.grid > .card');
+      var anyVisible = false;
+      cards.forEach(function(card){
+        var tags = (card.getAttribute('data-tags') || '').split(',');
+        var show = (tag === 'all') || tags.indexOf(tag) !== -1;
+        card.style.display = show ? '' : 'none';
+        if(show) anyVisible = true;
+      });
+      sec.style.display = anyVisible ? '' : 'none';
+    });
+  }
+
   function showCategory(catId){
     trackEvent('category_click', catId);
     var sections = document.querySelectorAll('section.cat');
     sections.forEach(function(sec){
       sec.style.display = (catId === 'all' || sec.id === catId) ? '' : 'none';
+      sec.querySelectorAll('.grid > .card').forEach(function(card){ card.style.display = ''; });
     });
+    // Reset tag filter chips to "Sab" since category navigation overrides tag filter
+    document.querySelectorAll('#tagFilterRow a').forEach(function(a){ a.classList.remove('tag-chip-active'); });
+    var sabChip = document.querySelector('#tagFilterRow a');
+    if(sabChip) sabChip.classList.add('tag-chip-active');
     // Clear any active search so it doesn't hide the chosen category
     var searchInput = document.getElementById('productSearch');
     if(searchInput && searchInput.value){
@@ -2003,6 +2112,49 @@
       gtag('event', eventName, params);
     }
   }
+
+  // ---------- Product sharing ----------
+  function productLink(pid){
+    return 'https://mayankgaur20-ux.github.io/mayank-car-shringar/#' + pid;
+  }
+  function shareWhatsApp(name, price, pid){
+    var msg = 'Dekhiye ye product: ' + name + ' — ' + price + '\n' + productLink(pid);
+    trackEvent('share', 'whatsapp', { product_name: name });
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  }
+  function shareFacebook(pid){
+    trackEvent('share', 'facebook', { product_id: pid });
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(productLink(pid)), '_blank');
+  }
+  function copyProductLink(pid, btn){
+    var link = productLink(pid);
+    trackEvent('share', 'copy_link', { product_id: pid });
+    function showCopied(){
+      var original = btn.innerHTML;
+      btn.innerHTML = '✓';
+      setTimeout(function(){ btn.innerHTML = original; }, 1500);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(link).then(showCopied).catch(function(){
+        window.prompt('Link copy kariye:', link);
+      });
+    } else {
+      window.prompt('Link copy kariye:', link);
+    }
+  }
+  // Scroll to a specific product if URL has a #product-N hash (from a shared link)
+  window.addEventListener('load', function(){
+    if(location.hash && location.hash.indexOf('#product-') === 0){
+      var target = document.querySelector(location.hash);
+      if(target){
+        setTimeout(function(){
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.outline = '3px solid var(--gainda)';
+          setTimeout(function(){ target.style.outline = ''; }, 2000);
+        }, 400);
+      }
+    }
+  });
 
   function orderSingleProduct(name, price, qid){
     var qty = getQty(qid);
